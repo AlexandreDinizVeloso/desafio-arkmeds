@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Equipamentos</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'equipamentos/css/style.css' %}">
+</head>
+<body>
+    <h1>Cadastro de Equipamentos</h1>
+
+    <ul id="equipamentos-list"></ul>
+
+    <div id="detalhes-equipamento" style="display: none;">
+        <h2>Detalhes do equipamento</h2>
+        <p id="detalhes-tipo"></p>
+        <p id="detalhes-fabricante"></p>
+        <p id="detalhes-modelo"></p>
+        <p id="detalhes-numero-serie"></p>
+        <p id="detalhes-data-compra"></p>
+        <p id="detalhes-valor-compra"></p>
+        <button id="detalhes-btn">Fechar</button>
+    </div>
+
+    <h2>Adicionar/Editar Equipamento</h2>
+    <form id="equipamento-form">
+        <input type="hidden" id="equipamento-id">
+
+        <label for="tipo">Tipo:</label>
+        <input type="text" id="tipo" required><br/>
+
+        <label for="fabricante">Fabricante:</label>
+        <input type="text" id="fabricante" required><br/>
+
+        <label for="modelo">Modelo:</label>
+        <input type="text" id="modelo" required><br/>
+
+        <label for="numero_serie">Número de série:</label>
+        <input type="text" id="numero_serie" required><br/>
+
+        <label for="data_compra">Data da compra:</label>
+        <input type="date" id="data_compra"><br/>
+
+        <label for="valor_compra">Valor da compra:</label>
+        <input type="number" id="valor_compra"><br/>
+
+        <button type="button" id="salvar-btn">Salvar equipamento</button>
+
+        <script src="{% static 'equipamentos/js/main.js' %}"></script>
+    </form>
+</body>
+</html>
