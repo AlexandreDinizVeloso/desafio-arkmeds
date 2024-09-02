@@ -1,0 +1,200 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.light-mode {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.dark-mode {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.theme-toggle {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    transition: color 0.3s;
+}
+
+#sun-icon {
+    display: block;
+}
+
+#moon-icon {
+    display: none;
+}
+
+.dark-mode #sun-icon {
+    display: none;
+}
+
+.dark-mode #moon-icon {
+    display: block;
+}
+
+h1 {
+    text-align: center;
+}
+
+#equipamentos-container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+#th-acao {
+    width: 20%;
+}
+
+#equipamentos-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#equipamentos-table th, #equipamentos-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+#equipamentos-table th {
+    background-color: #465945;
+    font-weight: bold;
+}
+
+#equipamentos-table td {
+    background-color: #738276;
+}
+
+#equipamentos-table td button {
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#equipamentos-table td button:hover {
+    background-color: #45a049;
+}
+
+#pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#pagination select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #4CAF50;
+    margin-right: 10px;
+}
+
+#pagination-buttons {
+    margin-top: 10px;
+}
+
+#pagination-buttons button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#pagination-buttons button.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#pagination-buttons button:hover {
+    background-color: #4CAF50;
+}
+
+button#adicionar-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button#adicionar-btn:hover {
+    background-color: #45a049;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 5px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
