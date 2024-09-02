@@ -6,48 +6,85 @@
     <title>Gerenciamento de Equipamentos</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'equipamentos/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <button id="toggle-theme" class="theme-toggle">
+        <i class="far fa-sun" id="sun-icon"></i>
+        <i class="fas fa-moon" id="moon-icon"></i>
+    </button>
     <h1>Cadastro de Equipamentos</h1>
 
-    <ul id="equipamentos-list"></ul>
+    <div id="equipamentos-container">
+        <table id="equipamentos-table">
+            <thead>
+                <tr>
+                    <th id="th-equipamentos">Equipamentos</th>
+                    <th id="th-acao">Ações</th>
+                </tr>
+            </thead>
+            <tbody id="equipamentos-list"></tbody>
+        </table>
+    </div>
+    
+    <div id="detalhes-equipamento" class="modal">
+        <div class="modal-content">
+            <span id="detalhes-close" class="close">&times;</span>
+            <h2>Detalhes do equipamento</h2>
+            <p id="detalhes-tipo"></p>
+            <p id="detalhes-fabricante"></p>
+            <p id="detalhes-modelo"></p>
+            <p id="detalhes-numero-serie"></p>
+            <p id="detalhes-data-compra"></p>
+            <p id="detalhes-valor-compra"></p>
+        </div>
+    </div>
+    
+    <button id="adicionar-btn">Adicionar Equipamento</button>
 
-    <div id="detalhes-equipamento" style="display: none;">
-        <h2>Detalhes do equipamento</h2>
-        <p id="detalhes-tipo"></p>
-        <p id="detalhes-fabricante"></p>
-        <p id="detalhes-modelo"></p>
-        <p id="detalhes-numero-serie"></p>
-        <p id="detalhes-data-compra"></p>
-        <p id="detalhes-valor-compra"></p>
-        <button id="detalhes-btn">Fechar</button>
+    <div id="equipamento-form-container" class="modal">
+        <div class="modal-content">
+            <span id="form-close" class="close">&times;</span>
+            <h2 id="form-title">Adicionar Equipamento</h2>
+            <form id="equipamento-form">
+                <input type="hidden" id="equipamento-id">
+
+                <label for="tipo">Tipo:</label>
+                <input type="text" id="tipo" required><br/>
+
+                <label for="fabricante">Fabricante:</label>
+                <input type="text" id="fabricante" required><br/>
+
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" required><br/>
+
+                <label for="numero_serie">Número de série:</label>
+                <input type="text" id="numero_serie" required><br/>
+
+                <label for="data_compra">Data da compra:</label>
+                <input type="date" id="data_compra"><br/>
+
+                <label for="valor_compra">Valor da compra:</label>
+                <input type="number" id="valor_compra"><br/>
+
+                <button type="button" id="salvar-btn">Salvar equipamento</button>
+            </form>
+        </div>
     </div>
 
-    <h2>Adicionar/Editar Equipamento</h2>
-    <form id="equipamento-form">
-        <input type="hidden" id="equipamento-id">
+    <div id="pagination">
+        <label for="items-per-page">Equipamentos por página:</label>
+        <select id="items-per-page">
+            <option selected value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+        </select>
+        <div id="pagination-buttons"></div>
+    </div>
 
-        <label for="tipo">Tipo:</label>
-        <input type="text" id="tipo" required><br/>
-
-        <label for="fabricante">Fabricante:</label>
-        <input type="text" id="fabricante" required><br/>
-
-        <label for="modelo">Modelo:</label>
-        <input type="text" id="modelo" required><br/>
-
-        <label for="numero_serie">Número de série:</label>
-        <input type="text" id="numero_serie" required><br/>
-
-        <label for="data_compra">Data da compra:</label>
-        <input type="date" id="data_compra"><br/>
-
-        <label for="valor_compra">Valor da compra:</label>
-        <input type="number" id="valor_compra"><br/>
-
-        <button type="button" id="salvar-btn">Salvar equipamento</button>
-
-        <script src="{% static 'equipamentos/js/main.js' %}"></script>
-    </form>
+    <script src="{% static 'equipamentos/js/main.js' %}"></script>
 </body>
 </html>
