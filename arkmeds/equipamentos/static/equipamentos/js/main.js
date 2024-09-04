@@ -35,10 +35,20 @@ function listarEquipamentos(pagina = 1, itens = itensPorPagina) {
                         <strong>Modelo:</strong> ${equipamento.modelo || 'N/A'}
                     </td>
                     <td>
-                        <button onclick="exibirDetalhes(${equipamento.id})">Detalhes</button>
-                        <button onclick="editarEquipamento(${equipamento.id})">Editar</button>
-                        <button onclick="deletarEquipamento(${equipamento.id})">Deletar</button>
+                        <div class="tooltip">
+                            <i class="fa-solid fa-file-lines" onclick="exibirDetalhes(${equipamento.id})" style="cursor: pointer; margin-right: 10px;"></i>
+                            <span class="tooltiptext">Detalhes</span>
+                        </div>
+                        <div class="tooltip">
+                            <i class="fa-solid fa-pen" onclick="editarEquipamento(${equipamento.id})" style="cursor: pointer; margin-right: 10px;"></i>
+                            <span class="tooltiptext">Editar</span>
+                        </div>
+                        <div class="tooltip">
+                            <i class="fa-solid fa-trash" onclick="deletarEquipamento(${equipamento.id})" style="cursor: pointer; color: red;"></i>
+                            <span class="tooltiptext">Deletar</span>
+                        </div>
                     </td>
+
                 `;
                 lista.appendChild(row);
             });
@@ -46,7 +56,7 @@ function listarEquipamentos(pagina = 1, itens = itensPorPagina) {
             let totalPaginas = Math.ceil(data.length / itens);
             criarPaginacao(totalPaginas, pagina);
         })
-        .catch(error => console.error('Error fetching equipamentos:', error));
+        .catch(error => mostrarErro('Erro ao listar equipamentos: ' + error.message));
 }
 
 function exibirDetalhes(id) {
@@ -60,7 +70,8 @@ function exibirDetalhes(id) {
             document.getElementById('detalhes-data-compra').textContent = `Data de Compra: ${data.data_compra}`;
             document.getElementById('detalhes-valor-compra').textContent = `Valor de Compra: ${data.valor_compra}`;
             document.getElementById('detalhes-equipamento').style.display = 'block';
-        });
+        })
+        .catch(error => mostrarErro('Erro ao exibir detalhes: ' + error.message));
 }
 
 function editarEquipamento(id) {
@@ -77,7 +88,8 @@ function editarEquipamento(id) {
 
             document.getElementById('form-title').textContent = 'Editar Equipamento';
             document.getElementById('equipamento-form-container').style.display = 'block';
-        });
+        })
+        .catch(error => mostrarErro('Erro ao editar equipamento: ' + error.message));
 }
 
 function salvarEquipamento() {
@@ -88,6 +100,13 @@ function salvarEquipamento() {
     let numero_serie = document.getElementById('numero_serie').value;
     let data_compra = document.getElementById('data_compra').value || null;
     let valor_compra = document.getElementById('valor_compra').value;
+
+    if (valor_compra < 0) {
+        mostrarErro("O valor de compra não pode ser negativo.");
+        return;
+    }
+
+    esconderErro();
 
     let url = '/api/equipamentos/';
     let method = 'POST';
@@ -116,9 +135,10 @@ function salvarEquipamento() {
             listarEquipamentos();
             document.getElementById('equipamento-form-container').style.display = 'none';
         } else {
-            alert('Erro ao salvar equipamento');
+            response.json().then(data => mostrarErro('Erro ao salvar equipamento: ' + (data.detail || 'Verifique os campos e tente novamente.')));
         }
-    });
+    })
+    .catch(error => mostrarErro('Erro de rede: ' + error.message));
 }
 
 function deletarEquipamento(id) {
@@ -130,9 +150,10 @@ function deletarEquipamento(id) {
             if (response.ok) {
                 listarEquipamentos();
             } else {
-                alert('Erro ao deletar equipamento');
+                mostrarErro('Erro ao deletar equipamento');
             }
-        });
+        })
+        .catch(error => mostrarErro('Erro de rede: ' + error.message));
     }
 }
 
@@ -149,6 +170,17 @@ function criarPaginacao(totalPaginas, paginaAtual) {
         button.addEventListener('click', () => listarEquipamentos(i, itensPorPagina));
         paginationButtons.appendChild(button);
     }
+}
+
+function mostrarErro(mensagem) {
+    const errorMessageDiv = document.getElementById('error-message');
+    errorMessageDiv.textContent = mensagem;
+    errorMessageDiv.style.display = 'block';
+}
+
+function esconderErro() {
+    const errorMessageDiv = document.getElementById('error-message');
+    errorMessageDiv.style.display = 'none';
 }
 
 document.getElementById('adicionar-btn').addEventListener('click', function() {
