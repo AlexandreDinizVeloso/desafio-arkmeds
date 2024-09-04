@@ -20,10 +20,14 @@ class EquipamentoIntegrationTest(StaticLiveServerTestCase):
     def test_add_and_list_equipamentos(self):
         self.selenium.get(self.live_server_url)
 
-        add_button = self.selenium.find_element(By.ID, 'adicionar-btn')
+        add_button = WebDriverWait(self.selenium, 10).until(
+            EC.element_to_be_clickable((By.ID, 'adicionar-btn'))
+        )
         add_button.click()
 
-        tipo_input = self.selenium.find_element(By.ID, 'tipo')
+        tipo_input = WebDriverWait(self.selenium, 10).until(
+            EC.presence_of_element_located((By.ID, 'tipo'))
+        )
         fabricante_input = self.selenium.find_element(By.ID, 'fabricante')
         modelo_input = self.selenium.find_element(By.ID, 'modelo')
         numero_serie_input = self.selenium.find_element(By.ID, 'numero_serie')
@@ -51,21 +55,40 @@ class EquipamentoIntegrationTest(StaticLiveServerTestCase):
 
     def test_edit_equipamento(self):
         self.selenium.get(self.live_server_url)
-        self.selenium.find_element(By.ID, 'adicionar-btn').click()
-        self.selenium.find_element(By.ID, 'tipo').send_keys('Notebook')
-        self.selenium.find_element(By.ID, 'fabricante').send_keys('Dell')
-        self.selenium.find_element(By.ID, 'modelo').send_keys('XPS 13')
-        self.selenium.find_element(By.ID, 'numero_serie').send_keys('SN123456')
-        self.selenium.find_element(By.ID, 'valor_compra').send_keys('1500')
-        self.selenium.find_element(By.ID, 'salvar-btn').click()
         
-        edit_button = self.selenium.find_element(By.XPATH, "//button[text()='Editar']")
+        WebDriverWait(self.selenium, 10).until(
+            EC.element_to_be_clickable((By.ID, 'adicionar-btn'))
+        ).click()
+        
+        tipo_input = WebDriverWait(self.selenium, 10).until(
+            EC.presence_of_element_located((By.ID, 'tipo'))
+        )
+        fabricante_input = self.selenium.find_element(By.ID, 'fabricante')
+        modelo_input = self.selenium.find_element(By.ID, 'modelo')
+        numero_serie_input = self.selenium.find_element(By.ID, 'numero_serie')
+        valor_compra_input = self.selenium.find_element(By.ID, 'valor_compra')
+        salvar_button = self.selenium.find_element(By.ID, 'salvar-btn')
+
+        tipo_input.send_keys('Notebook')
+        fabricante_input.send_keys('Dell')
+        modelo_input.send_keys('XPS 13')
+        numero_serie_input.send_keys('SN123456')
+        valor_compra_input.send_keys('1500')
+        salvar_button.click()
+
+        edit_button = WebDriverWait(self.selenium, 10).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "i.fa-pen"))
+        )
         edit_button.click()
-        tipo_input = self.selenium.find_element(By.ID, 'tipo')
+
+        tipo_input = WebDriverWait(self.selenium, 10).until(
+            EC.presence_of_element_located((By.ID, 'tipo'))
+        )
         tipo_input.clear()
         tipo_input.send_keys('Notebook Editado')
+
         self.selenium.find_element(By.ID, 'salvar-btn').click()
-        
+
         WebDriverWait(self.selenium, 10).until(
             EC.text_to_be_present_in_element(
                 (By.ID, 'equipamentos-list'),

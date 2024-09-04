@@ -8,4 +8,5 @@ class EquipamentoViewSet(viewsets.ModelViewSet):
     serializer_class = EquipamentoSerializer
 
 def index(request):
-    return render(request, 'equipamentos/index.html')
+    equipamentos = Equipamento.objects.all()
+    return render(request, 'equipamentos/index.html', {'equipamentos': equipamentos})
