@@ -35,3 +35,4 @@ class EquipamentoModelTest(TestCase):
             valor_compra=None
         )
         self.assertIsNone(equipamento.valor_compra)
+        

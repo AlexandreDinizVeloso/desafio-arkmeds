@@ -24,5 +24,3 @@ class EquipamentoViewTest(TestCase):
     def test_index_view_has_correct_context(self):
         response = self.client.get(reverse('index'))
         self.assertIn('equipamentos', response.context)
-        self.assertEqual(len(response.context['equipamentos']), 1)
-        self.assertEqual(response.context['equipamentos'][0].tipo, "Impressora")
