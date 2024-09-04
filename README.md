@@ -141,20 +141,30 @@ O projeto está organizado e estruturado da seguinte maneira:
     ```bash
         git@github.com:AlexandreDinizVeloso/desafio-arkmeds.git # Via SSH
     ```
+   
     
-2. Crie e ative o ambiente virtual:
+2. Localize, crie e ative o ambiente virtual:
     ```bash
+    cd desafio-arkmeds
     python -m venv env
     source env/bin/activate  # Linux/Mac
     env\Scripts\activate  # Windows
     ```
-3. Instale as dependências:
+3. Instale as dependências e acesse o projeto:
     ```bash
     pip install -r requirements.txt
+    cd arkmeds
     ```
 4. Rode as migrações:
     ```bash
     python manage.py migrate
+    ```
+
+5. Execute os testes:
+    ```bash
+    coverage run manage.py test # Executará os testes
+    coverage report # Mostrará o resultado dos testes no console
+    coverage html # Irá criar um arquivo .html com o resultado dos testes
     ```
 
 ## Executando o projeto
@@ -174,7 +184,7 @@ O projeto está organizado e estruturado da seguinte maneira:
         System check identified no issues (0 silenced).
         September 04, 2024 - 15:10:26
         Django version 3.2.25, using settings 'arkmeds.settings'
-        Starting development server at http://127.0.0.1:8000/
+        Starting development server at http://127.0.0.1:8000/ # Exemplo de resultado no console
         Quit the server with CTRL-BREAK.
         
     ```
