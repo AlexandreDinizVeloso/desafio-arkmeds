@@ -158,7 +158,7 @@ button#adicionar-btn:hover {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 999;
     left: 0;
     top: 0;
     width: 100%;
@@ -231,8 +231,17 @@ input[type="number"] {
     background-color: #fdd;
     border: 1px solid red;
     padding: 10px;
-    margin: 10px 0;
     border-radius: 5px;
+    z-index: 1000;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    max-width: 80%;
+    text-align: center; 
+    display: none;
 }
 
 .tooltip {

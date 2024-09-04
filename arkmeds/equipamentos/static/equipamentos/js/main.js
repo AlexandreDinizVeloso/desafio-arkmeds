@@ -176,8 +176,20 @@ function mostrarErro(mensagem) {
     const errorMessageDiv = document.getElementById('error-message');
     errorMessageDiv.textContent = mensagem;
     errorMessageDiv.style.display = 'block';
-}
 
+    setTimeout(() => {
+        errorMessageDiv.style.opacity = '1';
+        errorMessageDiv.style.transform = 'translateX(-50%) scale(1)';
+    }, 10);
+
+    setTimeout(() => {
+        errorMessageDiv.style.opacity = '0';
+        errorMessageDiv.style.transform = 'translateX(-50%) scale(0)';
+        setTimeout(() => {
+            errorMessageDiv.style.display = 'none';
+        }, 500);
+    }, 3000);
+}
 function esconderErro() {
     const errorMessageDiv = document.getElementById('error-message');
     errorMessageDiv.style.display = 'none';
