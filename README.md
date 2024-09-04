@@ -139,7 +139,7 @@ O projeto está organizado e estruturado da seguinte maneira:
 
 1. Clone o repositório.
     ```bash
-        git@github.com:AlexandreDinizVeloso/desafio-arkmeds.git # Via SSH
+    git clone git@github.com:AlexandreDinizVeloso/desafio-arkmeds.git # Via SSH
     ```
    
     
